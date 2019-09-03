@@ -68,4 +68,8 @@
       a_pwd = #{aPwd,jdbcType=VARCHAR}
     where a_id = #{aId,jdbcType=INTEGER}
   </update>
+  
+  <select id="login" resultMap="BaseResultMap">
+  select * from admin where a_name = #{aName,jdbcType=VARCHAR}
+  </select>
 </mapper>

@@ -14,4 +14,12 @@ public interface AdminMapper {
     int updateByPrimaryKeySelective(Admin record);
 
     int updateByPrimaryKey(Admin record);
+    
+    /**
+     *<p>Title: login</p>
+     *<p>Description:管理员登录 </p>
+     * @param record
+     * @return
+     */
+    Admin login (Admin record);
 }
