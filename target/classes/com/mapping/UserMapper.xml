@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.pojo.User">
+    <id column="u_id" jdbcType="INTEGER" property="uId" />
+    <result column="u_email" jdbcType="VARCHAR" property="uEmail" />
+    <result column="u_pwd" jdbcType="VARCHAR" property="uPwd" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    u_id, u_email, u_pwd
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where u_id = #{uId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where u_id = #{uId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.pojo.User">
+    insert into user (u_id, u_email, u_pwd
+      )
+    values (#{uId,jdbcType=INTEGER}, #{uEmail,jdbcType=VARCHAR}, #{uPwd,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.pojo.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uId != null">
+        u_id,
+      </if>
+      <if test="uEmail != null">
+        u_email,
+      </if>
+      <if test="uPwd != null">
+        u_pwd,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uId != null">
+        #{uId,jdbcType=INTEGER},
+      </if>
+      <if test="uEmail != null">
+        #{uEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="uPwd != null">
+        #{uPwd,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pojo.User">
+    update user
+    <set>
+      <if test="uEmail != null">
+        u_email = #{uEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="uPwd != null">
+        u_pwd = #{uPwd,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where u_id = #{uId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pojo.User">
+    update user
+    set u_email = #{uEmail,jdbcType=VARCHAR},
+      u_pwd = #{uPwd,jdbcType=VARCHAR}
+    where u_id = #{uId,jdbcType=INTEGER}
+  </update>
+</mapper>

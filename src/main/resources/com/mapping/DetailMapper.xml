@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.DetailMapper">
+  <resultMap id="BaseResultMap" type="com.pojo.Detail">
+    <result column="d_quantity" jdbcType="INTEGER" property="dQuantity" />
+    <result column="d_orderid" jdbcType="INTEGER" property="dOrderid" />
+    <result column="d_goodid" jdbcType="INTEGER" property="dGoodid" />
+  </resultMap>
+  <insert id="insert" parameterType="com.pojo.Detail">
+    insert into detail (d_quantity, d_orderid, d_goodid
+      )
+    values (#{dQuantity,jdbcType=INTEGER}, #{dOrderid,jdbcType=INTEGER}, #{dGoodid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.pojo.Detail">
+    insert into detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dQuantity != null">
+        d_quantity,
+      </if>
+      <if test="dOrderid != null">
+        d_orderid,
+      </if>
+      <if test="dGoodid != null">
+        d_goodid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dQuantity != null">
+        #{dQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="dOrderid != null">
+        #{dOrderid,jdbcType=INTEGER},
+      </if>
+      <if test="dGoodid != null">
+        #{dGoodid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

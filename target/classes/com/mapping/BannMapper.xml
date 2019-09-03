@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.BannMapper">
+  <resultMap id="BaseResultMap" type="com.pojo.Bann">
+    <id column="b_id" jdbcType="INTEGER" property="bId" />
+    <result column="b_title" jdbcType="VARCHAR" property="bTitle" />
+    <result column="b_content" jdbcType="VARCHAR" property="bContent" />
+    <result column="b_data" jdbcType="VARCHAR" property="bData" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    b_id, b_title, b_content, b_data
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bann
+    where b_id = #{bId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from bann
+    where b_id = #{bId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.pojo.Bann">
+    insert into bann (b_id, b_title, b_content, 
+      b_data)
+    values (#{bId,jdbcType=INTEGER}, #{bTitle,jdbcType=VARCHAR}, #{bContent,jdbcType=VARCHAR}, 
+      #{bData,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pojo.Bann">
+    insert into bann
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bId != null">
+        b_id,
+      </if>
+      <if test="bTitle != null">
+        b_title,
+      </if>
+      <if test="bContent != null">
+        b_content,
+      </if>
+      <if test="bData != null">
+        b_data,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bId != null">
+        #{bId,jdbcType=INTEGER},
+      </if>
+      <if test="bTitle != null">
+        #{bTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="bContent != null">
+        #{bContent,jdbcType=VARCHAR},
+      </if>
+      <if test="bData != null">
+        #{bData,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pojo.Bann">
+    update bann
+    <set>
+      <if test="bTitle != null">
+        b_title = #{bTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="bContent != null">
+        b_content = #{bContent,jdbcType=VARCHAR},
+      </if>
+      <if test="bData != null">
+        b_data = #{bData,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where b_id = #{bId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pojo.Bann">
+    update bann
+    set b_title = #{bTitle,jdbcType=VARCHAR},
+      b_content = #{bContent,jdbcType=VARCHAR},
+      b_data = #{bData,jdbcType=VARCHAR}
+    where b_id = #{bId,jdbcType=INTEGER}
+  </update>
+</mapper>
