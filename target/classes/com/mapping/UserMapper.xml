@@ -68,4 +68,16 @@
       u_pwd = #{uPwd,jdbcType=VARCHAR}
     where u_id = #{uId,jdbcType=INTEGER}
   </update>
+  
+  <select id="userList" resultMap="BaseResultMap">
+  select * from user 
+  <where>
+  	<if test="uEmail != null and uEmail != ''">
+  	and u_email = #{uEmail,jdbcType=VARCHAR}
+  	</if>
+  	<if test="uId != null and uId != ''">
+  	and u_id =  #{uId,jdbcType=INTEGER}
+  	</if>
+  </where>
+  </select>
 </mapper>

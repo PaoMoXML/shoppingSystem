@@ -1,5 +1,7 @@
 package com.dao;
 
+import java.util.List;
+
 import com.pojo.User;
 
 public interface UserMapper {
@@ -14,4 +16,12 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+    
+    /**
+     *<p>Title: userList</p>
+     *<p>Description: 查询用户列表</p>
+     * @param record
+     * @return
+     */
+    List<User> userList (User record);
 }

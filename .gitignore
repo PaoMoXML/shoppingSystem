@@ -1,2 +1,4 @@
 /target/
-/src/
+.classpath
+.project
+.gitgnore
