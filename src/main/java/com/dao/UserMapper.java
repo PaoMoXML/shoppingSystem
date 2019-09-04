@@ -17,11 +17,5 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
     
-    /**
-     *<p>Title: userList</p>
-     *<p>Description: 查询用户列表</p>
-     * @param record
-     * @return
-     */
-    List<User> userList (User record);
+    List<User> userList(User record);
 }

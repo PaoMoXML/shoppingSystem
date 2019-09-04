@@ -7,6 +7,8 @@ public class User {
 
     private String uPwd;
 
+    private Integer uStatus;
+
     public Integer getuId() {
         return uId;
     }
@@ -29,5 +31,13 @@ public class User {
 
     public void setuPwd(String uPwd) {
         this.uPwd = uPwd == null ? null : uPwd.trim();
+    }
+
+    public Integer getuStatus() {
+        return uStatus;
+    }
+
+    public void setuStatus(Integer uStatus) {
+        this.uStatus = uStatus;
     }
 }

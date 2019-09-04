@@ -31,6 +31,7 @@ public class UserServiceController {
 	@RequestMapping(value = "/userList")
 	@ResponseBody
 	public List<User> userList(User record){
+		record.setuStatus(0);
 		List<User> list = userService.userList(record);
 		return list;
 	}

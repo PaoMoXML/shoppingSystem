@@ -5,9 +5,10 @@
     <id column="u_id" jdbcType="INTEGER" property="uId" />
     <result column="u_email" jdbcType="VARCHAR" property="uEmail" />
     <result column="u_pwd" jdbcType="VARCHAR" property="uPwd" />
+    <result column="u_status" jdbcType="INTEGER" property="uStatus" />
   </resultMap>
   <sql id="Base_Column_List">
-    u_id, u_email, u_pwd
+    u_id, u_email, u_pwd, u_status
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -20,10 +21,10 @@
     where u_id = #{uId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.pojo.User">
-    insert into user (u_id, u_email, u_pwd
-      )
-    values (#{uId,jdbcType=INTEGER}, #{uEmail,jdbcType=VARCHAR}, #{uPwd,jdbcType=VARCHAR}
-      )
+    insert into user (u_id, u_email, u_pwd, 
+      u_status)
+    values (#{uId,jdbcType=INTEGER}, #{uEmail,jdbcType=VARCHAR}, #{uPwd,jdbcType=VARCHAR}, 
+      #{uStatus,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.pojo.User">
     insert into user
@@ -37,6 +38,9 @@
       <if test="uPwd != null">
         u_pwd,
       </if>
+      <if test="uStatus != null">
+        u_status,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="uId != null">
@@ -47,6 +51,9 @@
       </if>
       <if test="uPwd != null">
         #{uPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="uStatus != null">
+        #{uStatus,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -59,24 +66,31 @@
       <if test="uPwd != null">
         u_pwd = #{uPwd,jdbcType=VARCHAR},
       </if>
+      <if test="uStatus != null">
+        u_status = #{uStatus,jdbcType=INTEGER},
+      </if>
     </set>
     where u_id = #{uId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.pojo.User">
     update user
     set u_email = #{uEmail,jdbcType=VARCHAR},
-      u_pwd = #{uPwd,jdbcType=VARCHAR}
+      u_pwd = #{uPwd,jdbcType=VARCHAR},
+      u_status = #{uStatus,jdbcType=INTEGER}
     where u_id = #{uId,jdbcType=INTEGER}
   </update>
   
   <select id="userList" resultMap="BaseResultMap">
-  select * from user 
+    select * from user 
   <where>
   	<if test="uEmail != null and uEmail != ''">
   	and u_email = #{uEmail,jdbcType=VARCHAR}
   	</if>
   	<if test="uId != null and uId != ''">
   	and u_id =  #{uId,jdbcType=INTEGER}
+  	</if>
+  	<if test="uStatus != null and uStatus != ''">
+  	and u_status =  #{uStatus,jdbcType=INTEGER}
   	</if>
   </where>
   </select>
