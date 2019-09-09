@@ -1,6 +1,8 @@
 package com.pojo;
 
-public class User {
+import com.util.Page;
+
+public class User extends Page{
     private Integer uId;
 
     private String uEmail;

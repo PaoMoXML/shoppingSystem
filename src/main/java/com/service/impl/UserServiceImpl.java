@@ -25,6 +25,8 @@ public class UserServiceImpl implements UserService{
 	
 	@Autowired
 	UserMapper userMapper;
+	
+	
 
 	/**
 	 * <p>Title: userList</p>
@@ -36,6 +38,18 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public List<User> userList(User record) {
 		return userMapper.userList(record);
+	}
+
+	/**
+	 * <p>Title: updateByPrimaryKeySelective</p>
+	 * <p>Description: 删除用户（修改用户的状态为2）</p>
+	 * @param record
+	 * @return
+	 * @see com.service.UserService#updateByPrimaryKeySelective(com.pojo.User)
+	 */
+	@Override
+	public int updateByPrimaryKeySelective(User record) {
+		return userMapper.updateByPrimaryKeySelective(record);
 	}
 
 }

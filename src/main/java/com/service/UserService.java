@@ -24,6 +24,15 @@ public interface UserService {
      * @return
      */
     List<User> userList (User record);
+    
+    /**
+     *<p>Title: updateByPrimaryKeySelective</p>
+     *<p>Description: 删除用户（修改用户状态为2）</p>
+     * @param record
+     * @return
+     */
+    int updateByPrimaryKeySelective(User record);
+
 
 
 }
