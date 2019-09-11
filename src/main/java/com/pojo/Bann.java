@@ -12,8 +12,18 @@ public class Bann extends Page{
     private String bData;
 
     private Integer bStatus;
+    
+    private Integer dateCount;
 
-    public Integer getbId() {
+    public Integer getDateCount() {
+		return dateCount;
+	}
+
+	public void setDateCount(Integer dateCount) {
+		this.dateCount = dateCount;
+	}
+
+	public Integer getbId() {
         return bId;
     }
 

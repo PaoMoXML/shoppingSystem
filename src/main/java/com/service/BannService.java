@@ -83,4 +83,11 @@ public interface BannService {
 	 */
 	Integer restoreList(int[] id_arr,int bStatus);
 	
+	
+	/**
+	 *<p>Title: statistics</p>
+	 *<p>Description:统计公告日期 </p>
+	 * @return
+	 */
+	List<Bann> statistics();
 }

@@ -103,7 +103,7 @@ public class BannController {
 	@ResponseBody
 	public String add(@RequestBody Bann record) {
 
-		SimpleDateFormat tempDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
+		SimpleDateFormat tempDate = new SimpleDateFormat("yyyy-MM-dd");  
 		String datetime = tempDate.format(new java.util.Date()); 
 		record.setbData(datetime);
 		JSONObject json = new JSONObject();
@@ -171,5 +171,10 @@ public class BannController {
 		return json.toJSONString();
 	}
 	
-
+	
+	@RequestMapping(value = "/statistics")
+	@ResponseBody
+	public List<Bann>statistics(){
+		return bannService.statistics();
+	}
 }

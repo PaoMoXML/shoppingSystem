@@ -150,4 +150,8 @@
 	 		#{bId}
 	 	</foreach>
 	</update>
+	<!-- 统计数量 -->
+	<select id="statistics" resultMap="BaseResultMap">
+	SELECT b_data,COUNT(b_data) as dateCount FROM bann GROUP BY b_data
+	</select>
 </mapper>

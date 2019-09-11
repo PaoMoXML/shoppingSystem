@@ -13,6 +13,11 @@
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="../css/sweetalert.css" />
 
+<link rel="stylesheet" type="text/css" href="../css/font-awesome.css" />
+<link rel="stylesheet" type="text/css"
+	href="../css/font-awesome.min.css" />
+
+
 
 
 <%--js部分--%>
@@ -23,6 +28,8 @@
 <script src="../js/sweetalert.js"></script>
 <script src="../js/board.js"></script>
 <script src="../js/board2.js"></script>
+<script src="../js/echarts.min.js"></script>
+<script src="../js/bootstrap-table-editable.js"></script>
 
 </head>
 <body>
@@ -61,22 +68,22 @@
 
 
 				<div class="col-sm-1 col-sm-offset-4">
-					<button class="btn btn-primary" id="search_btn"style="float:right">查询</button>
+					<button class="btn btn-primary" id="search_btn"style="float:right"><i class="fa fa-search" aria-hidden="true"></i> 查询</button>
 				</div>
 			</div>
 		</div>
 
 
 
-		<button type="button" class="btn btn-info" id="checkAll">全选</button>
+		<button  type="button" class="btn btn-default" id="checkAll"><i class="fa fa-check" aria-hidden="true"></i>全选</button>
 
-		<button type="button" class="btn btn-info" id="uncheckAll">取消选择</button>
+		<button type="button" class="btn btn-default" id="uncheckAll"><i class="fa fa-check-circle-o" aria-hidden="true"></i> 取消选择</button>
 
-		<button type="button" class="btn btn-info" id="checkInvert">反选</button>
+		<button type="button" class="btn btn-default" id="checkInvert" ><i class="fa fa-check-circle" aria-hidden="true"></i> 反选</button>
 		
-		<button type="button" class="btn btn-primary" id="remove" style="float:right" >批量删除</button>
+		<button type="button" class="btn btn-primary" id="remove" style="float:right" ><i class="fa fa-trash" aria-hidden="true"></i> 批量删除</button>
 		
-		<button type="button" class="btn btn-primary" id="restore" style="float:right;margin-right:5px" >批量恢复</button>
+		<button type="button" class="btn btn-primary" id="restore" style="float:right;margin-right:5px" ><i class="fa fa-backward" aria-hidden="true"></i> 批量恢复</button>
 		
 
 		
@@ -171,26 +178,20 @@
 			
 			
 		}
-		
-		
-		
-		
-		
 
-		
-		
-		
-		
-		
 		//查询function
 			function a() {
 
 				$('#banntab').bootstrapTable('destroy').bootstrapTable({
 					method : 'get',
 					url : '${pageContext.request.contextPath}/bann/showBann',//请求路径
+					sortable: true,      //是否启用排序
+		            sortOrder: "ID desc",     //排序方式
 					striped : true, //是否显示行间隔色
 					pageNumber : 1, //初始化加载第一页
 					cache : true,//是否缓存数据
+		            sortable: true,//是否启用排序
+		            sortOrder: "desc",//排序方式
 					toolbar : '#toolbar', //工具按钮用哪个容器
 					buttonsAlign : "right", //按钮位置
 					pagination : true,//是否分页
@@ -199,6 +200,7 @@
 					pageList : [ 5, 10, 20, 30 ],//可选择单页记录数
 					showRefresh : true,//刷新按钮
 					clickToSelect : true,//点击选中
+					mobileResponsive : true,
 					queryParams : function(params) {//上传服务器的参数
 						var temp = {//如果是在服务器端实现分页，limit、offset这两个参数是必须的
 							limit : params.limit, // 每页显示数量
@@ -217,12 +219,11 @@
 					}, {
 						title : 'bID',
 						field : 'bId',
-						sortable : true,
 						width : 50,
+						sortable:true
 					}, {
 						title : '标题',
 						field : 'bTitle',
-						sortable : true,
 						width : 100,
 					}, {
 						title : '日期',
@@ -248,6 +249,9 @@
 
 			//处理状态 1：未发布 2：已删除 3：已发布
 			function formatStatus(value, row, index) {
+				
+				
+				
 				if (value == 1) {
 					return "未发布"
 				}
@@ -573,7 +577,7 @@
 
 		<!--添加公告 模态框 -->
 		<button type="button" class="btn btn-primary btn-lg"
-			data-toggle="modal" data-target="#modalTable">添加公告</button>
+			data-toggle="modal" data-target="#modalTable"><i class="fa fa-plus" aria-hidden="true"></i> 添加公告</button>
 		<div id="modalTable" class="modal fade" tabindex="-1" role="dialog">
 			<div class="modal-dialog" role="document" style="width: 60%">
 				<div class="modal-content">
@@ -612,6 +616,9 @@
 				</div>
 			</div>
 		</div>
+		
+		<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 600px;height:400px;"></div>
 
 	</div>
 
@@ -648,5 +655,56 @@
 		}
 	</script>
 
+    <script type="text/javascript">
+    
+    
+    var myChart = echarts.init(document.getElementById('main'));
+ // 显示标题，图例和空的坐标轴
+ myChart.setOption({
+     title: {
+         text: '公告添加时间统计'
+     },
+     tooltip: {},
+     legend: {
+         data:['数量']
+     },
+     xAxis: {
+         data: []
+     },
+     yAxis: {},
+     series: [{
+         name: '销量',
+         type: 'line',
+         data: []
+     }]
+ });
+	 //加载动画
+	 myChart.showLoading();
+ // 异步加载数据
+ $.get('${pageContext.request.contextPath}/bann/statistics').done(function (data) {
+	 //隐藏加载动画
+	 myChart.hideLoading();
+	 //数据处理
+	 var bDates = new Array();
+	 var dateCounts = new Array();
+		for(var i = 0;i <data.length;i++){
+			var bDate = data[i].bData;
+			var dateCount = data[i].dateCount;
+			bDates.push(bDate);
+			dateCounts.push(dateCount);
+		}
+     // 填入数据
+     myChart.setOption({
+         xAxis: {
+             data:bDates
+         },
+         series: [{
+             // 根据名字对应到相应的系列
+             name: '数量',
+             data: dateCounts
+         }]
+     });
+ });
+    </script>
 </body>
 </html>

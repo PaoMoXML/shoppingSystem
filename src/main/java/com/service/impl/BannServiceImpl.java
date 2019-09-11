@@ -116,5 +116,15 @@ public class BannServiceImpl implements BannService{
 	public Integer restoreList(int[] id_arr, int bStatus) {
 		return bannMapper.restoreList(id_arr, bStatus);
 	}
+	/**
+	 * <p>Title: statistics</p>
+	 * <p>Description: 统计公告日期</p>
+	 * @return
+	 * @see com.service.BannService#statistics()
+	 */
+	@Override
+	public List<Bann> statistics() {
+		return bannMapper.statistics();
+	}
 
 }

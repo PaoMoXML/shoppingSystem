@@ -26,6 +26,7 @@
 <script src="../js/board2.js"></script>
 
 
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
 </head>
 <body>
@@ -117,9 +118,12 @@
 				return temp;
 			},
 			columns : [ {
+				checkbox : true,
+			}, {
 				title : 'uID',
 				field : 'uId',
 				sortable : true,
+				width : 50,
 			}, {
 				title : 'Email',
 				field : 'uEmail',
@@ -127,12 +131,35 @@
 			}, {
 				title : 'pwd',
 				field : 'uPwd',
+			},{
+				title : '状态',
+				field : 'uStatus',
+				formatter : formatStatus,
+				width : 60,
 			}, {
 				title : '操作',
 				field : 'uId',
+				width : 158,
 				formatter : operation,//对资源进行操作
 			} ]
 		})
+		
+		
+		//状态处理
+			function formatStatus(value, row, index) {
+				if (value == 1) {
+					return "正常"
+				}
+				;
+				if (value == 2) {
+					return "已删除"
+				}
+				;
+				if (value == 3) {
+					return "未知"
+				}
+				;
+			}		
 
 		//删除、编辑操作
 		function operation(value, row, index) {
@@ -198,6 +225,21 @@
 
 		}
 	</script>
+	
+	
+<!--  	<input
+  id="passwordtest"
+  class="form-control"
+  type="password"
+  maxlength="10"
+  placeholder="Enter the password">
+
+<script>
+  $(function() {
+    $('#passwordtest').password()
+  })
+</script>  -->
+	
 
 </div>
 </body>

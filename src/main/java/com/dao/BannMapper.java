@@ -80,4 +80,11 @@ public interface BannMapper {
      */
     Integer restoreList(@Param("array")int[] id_arr,@Param("bStatus")int bStatus);
     
+    /**
+     *<p>Title: statistics</p>
+     *<p>Description:统计公告日期 </p>
+     * @return
+     */
+    List<Bann> statistics();
+    
 }
