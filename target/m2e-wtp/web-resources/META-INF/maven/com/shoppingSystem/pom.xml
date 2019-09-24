@@ -47,6 +47,12 @@
     <artifactId>mail</artifactId>
     <version>1.4.7</version>
 </dependency>
+
+<dependency>
+<groupId>com.github.qcloudsms</groupId>
+<artifactId>qcloudsms</artifactId>
+<version>1.0.6</version>
+</dependency>
   
   
   

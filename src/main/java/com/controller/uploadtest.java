@@ -36,10 +36,19 @@ import com.qcloud.cos.region.Region;
  * @date 2019年9月7日
  */
 public class uploadtest {
-    private static final String ACCESSKEY = "AKIDCYqkVVVkbm0BFISTp8WG0eCmFkEduzsg";
-    private static final String SECRETKEY = "mS1PadVCXBwtNsDQWRXcwJoI7nJmbrws";
-    private static final String BUCKETNAME = "xml-1256638142";
-    private static final String APPID = "1256638142 ";
+	
+//    private static final String ACCESSKEY = "AKIDCYqkVVVkbm0BFISTp8WG0eCmFkEduzsg";
+//    private static final String SECRETKEY = "mS1PadVCXBwtNsDQWRXcwJoI7nJmbrws";
+//    private static final String BUCKETNAME = "xml2-1256638142";
+//    private static final String APPID = "1256638142 ";
+//    private static final String REGIONID = "ap-shanghai";
+//    private static final String KEY="MyFile.png";
+	
+	
+	private static final String ACCESSKEY = "AKIDxLciYCGXxQfeKoEEHVUHScbLqJ1VshS0";
+    private static final String SECRETKEY = "XIomY4MVQ6cs77sBICyXqnVyLTN5btGN";
+    private static final String BUCKETNAME ="lcq-1300182490";
+    private static final String APPID = "1300182490";
     private static final String REGIONID = "ap-shanghai";
     private static final String KEY="MyFile.png";
     
@@ -63,7 +72,7 @@ public class uploadtest {
      */
     public static String uploadFile() {
 //        File localFile = new File("E:\\software\\JavaProject\\demo\\demo20\\src\\main\\resources\\1.jpg");
-        File localFile = new File("C:\\Users\\xml00\\Desktop\\1533531213528066039.png");
+        File localFile = new File("C:\\Users\\xml00\\Desktop\\ff壁纸\\暗影之鲶.jpg");
         String filename = localFile.getName();
         PutObjectRequest putObjectRequest = new PutObjectRequest(BUCKETNAME, filename, localFile);
 
@@ -226,7 +235,7 @@ public class uploadtest {
     }
 
     public static void main(String[] args) {
-//    	uploadFile();
+    	uploadFile();
 //        downLoadFile(BUCKETNAME , KEY);
 //         // deleteFile(BUCKETNAME , KEY01);
 //        createBucket("sunjunxian01-1251782781");
@@ -235,7 +244,7 @@ public class uploadtest {
 //        System.out.println(listObjects(BUCKETNAME));
         //System.out.println("BUCKETNAME的位置：" + getBucketLocation(BUCKETNAME));
     	
-    	getUrl();
+//    	getUrl();
     	
     	
     }

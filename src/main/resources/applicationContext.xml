@@ -38,12 +38,11 @@
 
     <!-- MyBatis的配置 -->
     <!-- 扫描存放SQL语句的xml映射文件 -->
+    
     <bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="typeAliasesPackage" value="com.pojo" />
         <property name="dataSource" ref="dataSource" />
         <property name="mapperLocations" value="classpath:com/mapping/*.xml" />
-
-        
     </bean>
 
     <!-- 扫描Mapper，并将其生命周期纳入Spring的管理 -->

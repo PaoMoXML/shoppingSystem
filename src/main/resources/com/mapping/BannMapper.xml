@@ -110,6 +110,8 @@
       <if test="bStatus != null and bStatus != ''">
       and b_status = #{bStatus,jdbcType=INTEGER}
       </if>
+  ORDER BY b_id DESC
+  
   LIMIT #{offset},#{limit}
   </select>
   

@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -54,6 +55,9 @@ public class upload {
     private static final String REGIONID = "ap-shanghai";
     private static final String KEY="MyFile.png";
     
+    
+
+    
     public static COSClient getCosClient() {
         // 1 初始化用户身份信息(secretId, secretKey)
         COSCredentials cred = new BasicCOSCredentials(ACCESSKEY, SECRETKEY);
@@ -78,7 +82,7 @@ public class upload {
      */
     @RequestMapping("/uploadImage")
 	@ResponseBody
-	public String upload(HttpServletRequest request, UploadedImageFile file)
+	public String upload(HttpServletRequest request,UploadedImageFile file)
             throws IllegalStateException, IOException {
     	
     	
@@ -120,7 +124,9 @@ public class upload {
             PutObjectResult putObjectResult = cc.putObject(putObjectRequest);
             // putobjectResult会返回文件的etag
             String etag = putObjectResult.getETag();
+            System.out.println("----------------------");
             System.out.println(etag);
+            System.out.println("----------------------");
         } catch (CosServiceException e) {
             e.printStackTrace();
         } catch (CosClientException e) {

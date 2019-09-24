@@ -55,6 +55,7 @@ public class BannController {
 		return pageHelper;
 	}
 	
+	
 	/**
 	 *<p>Title: showLikeBann</p>
 	 *<p>Description:模糊查询公告</p>
@@ -148,10 +149,7 @@ public class BannController {
 		return json.toJSONString();
 	}
 	
-	
-	
-	
-	
+
 	/**
 	 *<p>Title: changeBann</p>
 	 *<p>Description: 修改公告</p>
@@ -172,6 +170,11 @@ public class BannController {
 	}
 	
 	
+	/**
+	 *<p>Title: statistics</p>
+	 *<p>Description:Echarts使用 </p>
+	 * @return
+	 */
 	@RequestMapping(value = "/statistics")
 	@ResponseBody
 	public List<Bann>statistics(){

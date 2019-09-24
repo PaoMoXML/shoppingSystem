@@ -30,6 +30,10 @@
 <script src="../js/board2.js"></script>
 <script src="../js/echarts.min.js"></script>
 <script src="../js/bootstrap-table-editable.js"></script>
+<!-- 导出excel -->
+<script src="../js/tableExport.js"></script>
+<script src="../js/xlsx.core.min.js"></script>
+<script src="../js/bootstrap-table-export.js"></script>
 
 </head>
 <body>
@@ -72,19 +76,20 @@
 				</div>
 			</div>
 		</div>
-
-
-
+		
+		<div class="btn-group" role="group" aria-label="...">
 		<button  type="button" class="btn btn-default" id="checkAll"><i class="fa fa-check" aria-hidden="true"></i>全选</button>
 
 		<button type="button" class="btn btn-default" id="uncheckAll"><i class="fa fa-check-circle-o" aria-hidden="true"></i> 取消选择</button>
 
 		<button type="button" class="btn btn-default" id="checkInvert" ><i class="fa fa-check-circle" aria-hidden="true"></i> 反选</button>
+		</div>
+
+		<div class="btn-group" role="group" aria-label="..." style="float:right">
+		<button type="button" class="btn btn-default" id="restore"><i class="fa fa-repeat" aria-hidden="true"></i> 批量恢复</button>
 		
-		<button type="button" class="btn btn-primary" id="remove" style="float:right" ><i class="fa fa-trash" aria-hidden="true"></i> 批量删除</button>
-		
-		<button type="button" class="btn btn-primary" id="restore" style="float:right;margin-right:5px" ><i class="fa fa-backward" aria-hidden="true"></i> 批量恢复</button>
-		
+		<button type="button" class="btn btn-default" id="remove"><i class="fa fa-trash" aria-hidden="true"></i> 批量删除</button>
+		</div>
 
 		
 
@@ -189,6 +194,9 @@
 		            sortOrder: "ID desc",     //排序方式
 					striped : true, //是否显示行间隔色
 					pageNumber : 1, //初始化加载第一页
+					showExport: true, //是否显示导出
+			        exportDataType: "basic",//'basic':当前页的数据, 'all':全部的数据, 'selected':选中的数据
+			        exportTypes:['xlsx'],  //导出文件类型，[ 'csv', 'txt', 'sql', 'doc', 'excel', 'xlsx', 'pdf']
 					cache : true,//是否缓存数据
 		            sortable: true,//是否启用排序
 		            sortOrder: "desc",//排序方式
@@ -369,13 +377,13 @@
 				if (!confirm("是否确认删除？"))
 					return;
 				var rows = $("#banntab").bootstrapTable('getSelections');// 获得要删除的数据
-				if(rows[0].bStatus == 2){
-					swal('提示', "已删除，请不要重复删除", 'error');
-				}else{
-					
 				if (rows.length == 0) {// rows 主要是为了判断是否选中，下面的else内容才是主要
 					swal('提示', "请选择需要删除的id", 'error');
 					return;
+				}else{
+					
+				if(rows[0].bStatus == 2){
+					swal('提示', "已删除，请不要重复删除", 'error');
 				} else {
 					var ids = new Array();// 声明一个数组
 					$(rows).each(function() {// 通过获得别选中的来进行遍历
@@ -461,7 +469,7 @@
 
 
 		<button type="button" class="btn btn-primary btn-lg"
-			onclick="beDeleted" id="beDeleted">恢复被删除公告</button>
+			onclick="beDeleted" id="beDeleted"> <i class="fa fa-cogs" aria-hidden="true"></i> 恢复被删除公告</button>
 
 
 
@@ -658,7 +666,7 @@
     <script type="text/javascript">
     
     
-    var myChart = echarts.init(document.getElementById('main'));
+ var myChart = echarts.init(document.getElementById('main'));
  // 显示标题，图例和空的坐标轴
  myChart.setOption({
      title: {
@@ -687,12 +695,16 @@
 	 //数据处理
 	 var bDates = new Array();
 	 var dateCounts = new Array();
+	 console.log(data);
 		for(var i = 0;i <data.length;i++){
 			var bDate = data[i].bData;
 			var dateCount = data[i].dateCount;
 			bDates.push(bDate);
 			dateCounts.push(dateCount);
 		}
+		
+		console.log(bDates)
+		console.log(dateCounts)
      // 填入数据
      myChart.setOption({
          xAxis: {
