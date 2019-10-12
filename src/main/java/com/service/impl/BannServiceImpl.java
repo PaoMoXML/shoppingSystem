@@ -5,6 +5,7 @@
  */
 package com.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -125,6 +126,18 @@ public class BannServiceImpl implements BannService{
 	@Override
 	public List<Bann> statistics() {
 		return bannMapper.statistics();
+	}
+	/**
+	 * <p>Title: getList</p>
+	 * <p>Description: </p>
+	 * @return
+	 * @see com.service.BannService#getList()
+	 */
+	
+	@Override
+	public ArrayList<Bann> getBannList() {
+		ArrayList<Bann> list=bannMapper.getList();
+		return list;
 	}
 
 }

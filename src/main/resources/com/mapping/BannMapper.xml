@@ -156,4 +156,20 @@
 	<select id="statistics" resultMap="BaseResultMap">
 	SELECT b_data,COUNT(b_data) as dateCount FROM bann GROUP BY b_data
 	</select>
+	
+	<!--   获取公告列表 -->
+  <select id="" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bann
+  
+  </select>
+  
+  <!--   获取公告列表 -->
+  <select id="getList" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bann
+  
+  </select>
 </mapper>

@@ -13,12 +13,6 @@ public interface UserMapper {
 
     User selectByPrimaryKey(Integer uId);
 
-    /**
-     *<p>Title: updateByPrimaryKeySelective</p>
-     *<p>Description: 删除用户（修改用户状态为：2）</p>
-     * @param record
-     * @return
-     */
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
@@ -29,6 +23,16 @@ public interface UserMapper {
      * @param record
      * @return
      */
-    List<User> userList(User record);
-    
+    List<User> userList (User record);
+
+	/**   
+	* @Function: UserMapper.java
+	* @Description: 该函数的功能描述
+	* @version: v1.0.0
+	* @author: 李彩清
+	* @date: 2019年9月29日 下午3:27:11 
+	*
+	       
+	*/
+	User selectUser(User u);
 }

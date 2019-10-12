@@ -1,5 +1,6 @@
 package com.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -86,5 +87,7 @@ public interface BannMapper {
      * @return
      */
     List<Bann> statistics();
+    
+    ArrayList<Bann> getList();
     
 }

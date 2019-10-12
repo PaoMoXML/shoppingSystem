@@ -6,6 +6,7 @@
 package com.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -179,5 +180,18 @@ public class BannController {
 	@ResponseBody
 	public List<Bann>statistics(){
 		return bannService.statistics();
+	}
+	
+	/**
+	 *<p>Title: goodList</p>
+	 *<p>Description:获取公告列表（展示） </p>
+	 * @return
+	 */
+	@RequestMapping("/bannList")
+	@ResponseBody
+	public ArrayList<Bann> goodList() {
+	ArrayList< Bann> list=bannService.getBannList();
+	return list;
+	
 	}
 }

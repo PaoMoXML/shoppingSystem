@@ -20,11 +20,11 @@
     delete from user
     where u_id = #{uId,jdbcType=INTEGER}
   </delete>
+<!--   注册 -->
   <insert id="insert" parameterType="com.pojo.User">
-    insert into user (u_id, u_email, u_pwd, 
-      u_status)
-    values (#{uId,jdbcType=INTEGER}, #{uEmail,jdbcType=VARCHAR}, #{uPwd,jdbcType=VARCHAR}, 
-      #{uStatus,jdbcType=INTEGER})
+    insert into user (u_id, u_email, u_pwd
+      )
+    values (#{uId,jdbcType=INTEGER}, #{uEmail,jdbcType=VARCHAR}, #{uPwd,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.pojo.User">
     insert into user
@@ -79,7 +79,7 @@
       u_status = #{uStatus,jdbcType=INTEGER}
     where u_id = #{uId,jdbcType=INTEGER}
   </update>
-  
+<!--   获取用户列表 -->
   <select id="userList" resultMap="BaseResultMap">
     select * from user 
   <where>
@@ -93,5 +93,12 @@
   	and u_status =  #{uStatus,jdbcType=INTEGER}
   	</if>
   </where>
+  </select>
+  
+  <!--   用户登录 -->
+  <select id="selectUser" resultMap="BaseResultMap">
+    select *
+    from user
+    where u_email = #{uEmail,jdbcType=VARCHAR} and u_pwd = #{uPwd,jdbcType=VARCHAR}
   </select>
 </mapper>

@@ -5,6 +5,7 @@
  */
 package com.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.pojo.Bann;
@@ -90,4 +91,11 @@ public interface BannService {
 	 * @return
 	 */
 	List<Bann> statistics();
+
+	/**
+	 *<p>Title: getBannList</p>
+	 *<p>Description: </p>
+	 * @return
+	 */
+	ArrayList<Bann> getBannList();
 }

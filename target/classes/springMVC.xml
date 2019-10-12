@@ -29,7 +29,7 @@
  <!-- 视图定位到/WEB/INF/jsp 这个目录下 -->
  <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
      <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
-     <property name="prefix" value="/" />
+     <property name="prefix" value="/admin/" />
      <property name="suffix" value=".jsp" />
  </bean>
  
@@ -46,6 +46,17 @@
         </mvc:interceptor>  
         当设置多个拦截器时，先按顺序调用preHandle方法，然后逆序调用每个拦截器的postHandle和afterCompletion方法  
     </mvc:interceptors>  -->
+    
+    <!--配置拦截器, 多个拦截器,顺序执行 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+		
+			<mvc:mapping path="/user/other/**" />
+			
+			<bean class="Interceptor.UserInterceptor"></bean>
+		</mvc:interceptor>
+		
+	</mvc:interceptors>
     
     <!-- 配置MultipartResolver 用于文件上传 使用spring的CommosMultipartResolver -->  
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">   

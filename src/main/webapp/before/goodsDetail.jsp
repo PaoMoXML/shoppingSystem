@@ -66,7 +66,7 @@
 						</li>
 						<li><span>类型:</span>水果</li>
 						<li><span>购买数量:</span><input type="text" name="shoppingnum"
-							class="good_txt" value="1" /> (库存200件)</li>
+							class="good_txt" value="1" /> (库存200件)</li >
 					</ul>
 				</div>
 				<p class="bottom10 top5">
